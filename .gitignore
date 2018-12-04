@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /bin-int/Debug-x64
+/bin-int/Debug-windows-x86_64/Hazel/Hazel.tlog
+/bin-int/Debug-windows-x86_64

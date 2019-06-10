@@ -4,8 +4,6 @@
 #include <glad/glad.h>
 namespace Hazel {
 
-
-
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float * vertices, uint32_t size)
 	{
 		glCreateBuffers(1, &m_RendererID);
@@ -30,7 +28,6 @@ namespace Hazel {
 
 	// INDEX BUFFER ///////////////////////////////////////////////////////////////
 
-
 	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)
 		: m_Count(count)
 	{
@@ -53,5 +50,4 @@ namespace Hazel {
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-
 }

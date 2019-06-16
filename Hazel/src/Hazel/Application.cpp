@@ -5,7 +5,7 @@
 
 #include"Hazel/Log.h"
 
-#include <glad/glad.h>
+#include "Hazel/Renderer/Renderer.h"
 
 #include "Input.h"
 
@@ -122,11 +122,16 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
-			glClearColor(0, 0, 0, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
 
+
+			RenderCommand::SetClearColor({ 0, 0, 0, 1 });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 			m_Shader->Bind();
-			m_VertexArray->Bind();
+			Renderer::Submit(m_VertexArray);
+			Renderer::EndScene();
+
 			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)

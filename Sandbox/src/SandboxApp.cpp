@@ -127,7 +127,7 @@ public:
 
 		m_FlatColorShader.reset(Hazel::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
-				m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
 
 		std::string textureShaderVertexSrc = R"(
 			#version 330 core
@@ -162,7 +162,7 @@ public:
 			}
 		)";
 
-		m_TextureShader.reset(Hazel::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		m_TextureShader.reset(Hazel::Shader::Create("assets/shaders/Texture.glsl"));
 
 		m_Texture = Hazel::Texture2D::Create("assets/textures/2000px-Checkerboard_pattern.svg.png");
 

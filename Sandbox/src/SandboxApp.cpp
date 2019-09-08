@@ -93,8 +93,6 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
-
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			
@@ -125,9 +123,9 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Hazel::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = Hazel::Shader::Create("FlatColorShader", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-		m_Shader.reset(Hazel::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Hazel::Shader::Create("TriangleShader", vertexSrc, fragmentSrc);
 
 		std::string textureShaderVertexSrc = R"(
 			#version 330 core
@@ -162,7 +160,7 @@ public:
 			}
 		)";
 
-		m_TextureShader.reset(Hazel::Shader::Create("assets/shaders/Texture.glsl"));
+		m_TextureShader = Hazel::Shader::Create("assets/shaders/Texture.glsl");
 
 		m_Texture = Hazel::Texture2D::Create("assets/textures/2000px-Checkerboard_pattern.svg.png");
 
@@ -229,6 +227,7 @@ public:
 	{
 	}
 private:
+	Hazel::ShaderLibrary m_ShaderLibrary;
 	Hazel::Ref<Hazel::Shader> m_Shader;
 	Hazel::Ref<Hazel::VertexArray> m_VertexArray;
 

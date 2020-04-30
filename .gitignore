@@ -262,3 +262,4 @@ __pycache__/
 /bin-int/Debug-x64
 /bin-int/Debug-windows-x86_64/Hazel/Hazel.tlog
 /bin-int/Debug-windows-x86_64
+/Sandbox/HazelProfile-Runtime.json

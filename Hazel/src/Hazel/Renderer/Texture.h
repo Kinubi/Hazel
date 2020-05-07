@@ -3,6 +3,7 @@
 #include "Hazel/Core/Core.h"
 #include <string>
 
+
 namespace Hazel {
 
 	class Texture

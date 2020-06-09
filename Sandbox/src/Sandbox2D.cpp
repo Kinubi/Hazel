@@ -33,6 +33,11 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	m_Texture = Hazel::Texture2D::Create("assets/textures/2000px-Checkerboard_pattern.svg.png");
+
+	Hazel::FramebufferSpecification fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_Framebuffer = Hazel::Framebuffer::Create(fbSpec);
 	m_SpriteSheet = Hazel::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
 
 	s_TextureMap['D'] = Hazel::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6,11 }, {128.0f, 128.0f});
@@ -67,6 +72,8 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 
 	Hazel::Renderer2D::ResetStats();
 
+	m_Framebuffer->Bind();
+
 	Hazel::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Hazel::RenderCommand::Clear();
 #if 0
@@ -92,7 +99,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 	}
 
 	Hazel::Renderer2D::EndScene();
-
+#endif
 	if (Hazel::Input::IsMouseButtonPressed(HZ_MOUSE_BUTTON_LEFT))
 	{
 		auto [x, y] = Hazel::Input::GetMousePos();
@@ -107,7 +114,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 		for (int i = 0; i < 5; i++)
 			m_ParticleSystem.Emit(m_Particle);
 	}
-#endif
+
 	Hazel::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 	for (uint32_t y = 0; y < m_MapHeight; y++)
@@ -132,6 +139,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 
 	m_ParticleSystem.OnUpdate(ts);
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+	m_Framebuffer->Unbind();
 }
 
 void Sandbox2D::OnImGuiRender()
@@ -139,75 +147,78 @@ void Sandbox2D::OnImGuiRender()
 	HZ_PROFILE_FUNCTION();
 
 
-
-	static bool dockspaceOpen = true;
-	static bool opt_fullscreen_persistant = true;
-	static ImGuiDockNodeFlags opt_flags = ImGuiDockNodeFlags_None;
-	bool opt_fullscreen = opt_fullscreen_persistant;
-
-	// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
-	// because it would be confusing to have two docking targets within each others.
-	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-	if (opt_fullscreen)
+	static bool dockingEnabled = true;
+	if (dockingEnabled)
 	{
-		ImGuiViewport* viewport = ImGui::GetMainViewport();
-		ImGui::SetNextWindowPos(viewport->Pos);
-		ImGui::SetNextWindowSize(viewport->Size);
-		ImGui::SetNextWindowViewport(viewport->ID);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-		window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-	}
+		static bool dockspaceOpen = true;
+		static bool opt_fullscreen_persistant = true;
+		static ImGuiDockNodeFlags opt_flags = ImGuiDockNodeFlags_None;
+		bool opt_fullscreen = opt_fullscreen_persistant;
 
-	// When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
-	if (opt_flags & ImGuiDockNodeFlags_PassthruDockspace)
-		window_flags |= ImGuiWindowFlags_NoBackground;
-
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
-	ImGui::PopStyleVar();
-
-	if (opt_fullscreen)
-		ImGui::PopStyleVar(2);
-
-	// Dockspace
-	ImGuiIO& io = ImGui::GetIO();
-	if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-	{
-		ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
-		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), opt_flags);
-	}
-
-	if (ImGui::BeginMenuBar())
-	{
-		if (ImGui::BeginMenu("File"))
+		// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
+		// because it would be confusing to have two docking targets within each others.
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+		if (opt_fullscreen)
 		{
-			// Disabling fullscreen would allow the window to be moved to the front of other windows, 
-			// which we can't undo at the moment without finer window depth/z control.
-			//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
-
-			if (ImGui::MenuItem("Exit")) Hazel::Application::Get().Close();
-			ImGui::EndMenu();
+			ImGuiViewport* viewport = ImGui::GetMainViewport();
+			ImGui::SetNextWindowPos(viewport->Pos);
+			ImGui::SetNextWindowSize(viewport->Size);
+			ImGui::SetNextWindowViewport(viewport->ID);
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+			window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 		}
 
-		ImGui::EndMenuBar();
+		// When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
+		if (opt_flags & ImGuiDockNodeFlags_PassthruDockspace)
+			window_flags |= ImGuiWindowFlags_NoBackground;
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
+		ImGui::PopStyleVar();
+
+		if (opt_fullscreen)
+			ImGui::PopStyleVar(2);
+
+		// Dockspace
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+		{
+			ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
+			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), opt_flags);
+		}
+
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("File"))
+			{
+				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
+				// which we can't undo at the moment without finer window depth/z control.
+				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+				if (ImGui::MenuItem("Exit")) Hazel::Application::Get().Close();
+				ImGui::EndMenu();
+			}
+
+			ImGui::EndMenuBar();
+		}
+
+		ImGui::Begin("Settings");
+
+		auto stats = Hazel::Renderer2D::GetStats();
+		ImGui::Text("Renderer2D Stats:");
+		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+		ImGui::Text("Quad Count: %d", stats.QuadCount);
+		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
+		ImGui::Text("Indecis: %d", stats.GetTotalIndexCount());
+		ImGui::Text("Frame time: %d");
+
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		ImGui::Image((void*)textureID, ImVec2{ 1280.0f, 720.0f});
+		ImGui::End();
+		ImGui::End();
 	}
-
-	ImGui::Begin("Settings");
-
-	auto stats = Hazel::Renderer2D::GetStats();
-	ImGui::Text("Renderer2D Stats:");
-	ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-	ImGui::Text("Quad Count: %d", stats.QuadCount);
-	ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
-	ImGui::Text("Indecis: %d", stats.GetTotalIndexCount());
-	ImGui::Text("Frame time: %d");
-
-	uint32_t textureID = m_Texture->GetRendererID();
-	ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
-	ImGui::End();
-	ImGui::End();
 }
 
 void Sandbox2D::OnEvent(Hazel::Event& e)

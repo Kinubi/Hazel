@@ -1,0 +1,4 @@
+C:\Users\baren\source\repos\Hazel 2\Hazel\vendor\imgui\bin\Debug-windows-x86_64\ImGui\ImGui.pdb
+C:\Users\baren\source\repos\Hazel 2\Hazel\vendor\imgui\bin-int\Debug-windows-x86_64\ImGui\ImGui.pdb
+C:\Users\baren\source\repos\Hazel\Hazel\vendor\imgui\bin\Debug-windows-x86_64\ImGui\ImGui.pdb
+C:\Users\baren\source\repos\Hazel\Hazel\vendor\imgui\bin-int\Debug-windows-x86_64\ImGui\ImGui.pdb

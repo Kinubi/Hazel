@@ -69,6 +69,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.json
 
 # Chutzpah Test files
 _Chutzpah*
@@ -262,4 +263,3 @@ __pycache__/
 /bin-int/Debug-x64
 /bin-int/Debug-windows-x86_64/Hazel/Hazel.tlog
 /bin-int/Debug-windows-x86_64
-/Sandbox/HazelProfile-Runtime.json

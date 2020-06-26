@@ -30,5 +30,7 @@ namespace Hazel {
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.4f, 1.0f };
 
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
+
 	};
 }

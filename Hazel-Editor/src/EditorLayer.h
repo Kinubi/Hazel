@@ -24,6 +24,10 @@ namespace Hazel {
 		Ref<VertexArray> m_SquareVA;
 		Ref<Framebuffer> m_Framebuffer;
 
+		Ref<Scene> m_ActiveScene;
+
+		entt::entity m_SquareEntity;
+
 		Ref<Texture2D> m_Texture;
 
 		glm::vec2 m_ViewportSize;

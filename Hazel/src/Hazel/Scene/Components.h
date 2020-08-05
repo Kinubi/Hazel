@@ -1,7 +1,8 @@
 #pragma once
 
+#include <glm/glm.hpp>
 
-#include "glm/glm.hpp"
+#include "SceneCamera.h"
 
 namespace Hazel {
 
@@ -21,7 +22,7 @@ namespace Hazel {
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4 & transform)
+		TransformComponent(const glm::mat4& transform)
 			: Transform(transform) {}
 
 		operator glm::mat4& () { return Transform; }
@@ -34,10 +35,18 @@ namespace Hazel {
 
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
-		SpriteRendererComponent(const glm::vec4 & color)
+		SpriteRendererComponent(const glm::vec4& color)
 			: Color(color) {}
 	};
-		
 
+	struct CameraComponent
+	{
+		SceneCamera Camera;
+		bool Primary = true; // TODO: think about moving to Scene
+		bool FixedAspectRatio = false;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+	};
 
 }

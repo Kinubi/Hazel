@@ -13,3 +13,6 @@
 [submodule "Hazel/vendor/imgui"]
 	path = Hazel/vendor/imgui
 	url = https://github.com/ocornut/imgui/
+[submodule "Hazel/vendor/yaml-cpp"]
+	path = Hazel/vendor/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git

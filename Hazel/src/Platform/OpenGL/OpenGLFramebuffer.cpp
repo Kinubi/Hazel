@@ -34,6 +34,28 @@ namespace Hazel {
 			return false;
 		}
 
+		static GLenum HazelTextureFormatToGL(FramebufferTextureFormat format)
+		{
+			switch (format)
+			{
+			case FramebufferTextureFormat::RGBA8: return GL_RGBA8;
+			case FramebufferTextureFormat::RED_INTEGER: return GL_RED_INTEGER;
+			}
+			HZ_CORE_ASSERT(false);
+			return 0;
+		}
+
+		static GLenum GLDataType(FramebufferTextureFormat format)
+		{
+			switch (format)
+			{
+			case FramebufferTextureFormat::RGBA8: return GL_UNSIGNED_BYTE;
+			case FramebufferTextureFormat::RED_INTEGER: return GL_INT;
+			}
+			HZ_CORE_ASSERT(false);
+			return 0;
+		}
+
 		static void AttachColorTexture(uint32_t id, int samples, GLenum internalFormat, GLenum format, uint32_t width, uint32_t height, int index)
 		{
 			bool multisampled = samples > 1;
@@ -169,6 +191,7 @@ namespace Hazel {
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
 		glViewport(0, 0, m_Specification.Width, m_Specification.Height);
+
 	}
 
 	void OpenGLFramebuffer::Unbind()
@@ -196,6 +219,15 @@ namespace Hazel {
 		int pixelData;
 		glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
 		return pixelData;
+	}
+
+	void OpenGLFramebuffer::ClearAttachment(uint32_t attachmentIndex, int value)
+	{
+		HZ_CORE_ASSERT(attachmentIndex < m_ColorAttachments.size());
+
+		auto& spec = m_ColorAttachmentSpecifications[attachmentIndex];
+
+		glClearTexImage(m_ColorAttachments[attachmentIndex], 0, Utils::HazelTextureFormatToGL(spec.TextureFormat), GL_INT, &value);
 	}
 
 }

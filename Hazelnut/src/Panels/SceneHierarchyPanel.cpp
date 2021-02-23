@@ -61,6 +61,7 @@ namespace Hazel {
 		ImGui::End();
 	}
 
+
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity)
 	{
 		auto& tag = entity.GetComponent<TagComponent>().Tag;

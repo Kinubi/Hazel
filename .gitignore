@@ -264,3 +264,5 @@ __pycache__/
 /bin-int/Debug-windows-x86_64/Hazel/Hazel.tlog
 /bin-int/Debug-windows-x86_64
 /Hazel/vendor/glm
+/Hazel/vendor/VulkanSDK
+/Hazelnut/assets/cache/shader/opengl

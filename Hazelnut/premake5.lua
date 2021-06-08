@@ -1,8 +1,8 @@
 project "Hazelnut"
 	kind "ConsoleApp"
 	language "C++"
-	cppdialect "C++latest"
-	staticruntime "on"
+	cppdialect "C++17"
+	staticruntime "off"
 
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")

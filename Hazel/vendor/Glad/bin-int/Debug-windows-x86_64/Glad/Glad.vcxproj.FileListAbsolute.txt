@@ -1,4 +1,2 @@
 C:\Users\baren\source\repos\Hazel 2\Hazel\vendor\Glad\bin\Debug-windows-x86_64\Glad\Glad.pdb
 C:\Users\baren\source\repos\Hazel 2\Hazel\vendor\Glad\bin-int\Debug-windows-x86_64\Glad\Glad.pdb
-C:\Users\baren\source\repos\Hazel\Hazel\vendor\Glad\bin\Debug-windows-x86_64\Glad\Glad.pdb
-C:\Users\baren\source\repos\Hazel\Hazel\vendor\Glad\bin-int\Debug-windows-x86_64\Glad\Glad.pdb

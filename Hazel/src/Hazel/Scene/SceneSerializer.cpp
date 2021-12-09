@@ -386,12 +386,12 @@ namespace Hazel {
 				if (circleCollider2DComponent)
 				{
 					auto& cc2D = deserializedEntity.AddComponent<CircleCollider2DComponent>();
-					cc2D.Offset = boxCollider2DComponent["Offset"].as<glm::vec2>();
-					cc2D.Radius = boxCollider2DComponent["Radius"].as <float> ();
-					cc2D.Density = boxCollider2DComponent["Density"].as<float>();
-					cc2D.Friction = boxCollider2DComponent["Friction"].as<float>();
-					cc2D.Restitution = boxCollider2DComponent["Restitution"].as<float>();
-					cc2D.RestitutionThreshold = boxCollider2DComponent["RestitutionThreshold"].as<float>();
+					cc2D.Offset = circleCollider2DComponent["Offset"].as<glm::vec2>();
+					cc2D.Radius = circleCollider2DComponent["Radius"].as<float>();
+					cc2D.Density = circleCollider2DComponent["Density"].as<float>();
+					cc2D.Friction = circleCollider2DComponent["Friction"].as<float>();
+					cc2D.Restitution = circleCollider2DComponent["Restitution"].as<float>();
+					cc2D.RestitutionThreshold = circleCollider2DComponent["RestitutionThreshold"].as<float>();
 				}
 			}
 		}

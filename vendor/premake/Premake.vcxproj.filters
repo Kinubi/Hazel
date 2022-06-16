@@ -4,62 +4,131 @@
     <Filter Include="..">
       <UniqueIdentifier>{61705900-4DFC-870B-B6AA-880BA255880B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel">
-      <UniqueIdentifier>{24146F37-10E1-C942-39FA-B7EA2526FFD0}</UniqueIdentifier>
+    <Filter Include="..\..">
+      <UniqueIdentifier>{CC6E590B-3883-81BC-0105-251C6DD87DED}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel\vendor">
-      <UniqueIdentifier>{011A063F-6DA5-7303-76B6-F6F7E2C0CF03}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel">
+      <UniqueIdentifier>{CFF68CBA-3BAC-05B0-C4A0-FF863055FCB3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel\vendor\Box2D">
-      <UniqueIdentifier>{CF803715-3BED-F20F-04E1-8A6D700C1578}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel\vendor">
+      <UniqueIdentifier>{4CEE6A6D-38D2-2BC3-A132-26168D351645}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel\vendor\GLFW">
-      <UniqueIdentifier>{E03DB63E-CCCC-3F08-75EB-5303615950AE}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel\vendor\Box2D">
+      <UniqueIdentifier>{5A213B46-4646-8AC6-6F91-6F565B1589E4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel\vendor\Glad">
-      <UniqueIdentifier>{88C9B63E-7458-4008-1D77-540309E550AE}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel\vendor\GLFW">
+      <UniqueIdentifier>{0B793240-77B0-7AD7-80BA-DEFAEC70A1D0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel\vendor\imgui">
-      <UniqueIdentifier>{2BE4F717-9750-B312-6044-4B70CC6FD57A}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel\vendor\Glad">
+      <UniqueIdentifier>{B3043340-1F3C-7BD7-2846-DFFA94FCA1D0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazel\vendor\yaml-cpp">
-      <UniqueIdentifier>{D35154DB-BF76-A35B-E8C1-88EBD445A279}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel\vendor\imgui">
+      <UniqueIdentifier>{B684FB48-A2A9-4AC9-CBF4-2F59B77849E7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Hazelnut">
-      <UniqueIdentifier>{1B351CC0-87EA-94B5-10DF-8E8C7C938BB9}</UniqueIdentifier>
+    <Filter Include="..\..\Hazel\vendor\yaml-cpp">
+      <UniqueIdentifier>{7E2A8069-EA37-AE4F-731E-AA3ADF2A7A06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Sandbox">
-      <UniqueIdentifier>{3F7B6B1D-2B33-AD6A-943A-86C68011485B}</UniqueIdentifier>
+    <Filter Include="..\..\Hazelnut">
+      <UniqueIdentifier>{E69B64C6-D269-58CC-BBFD-C8F2A76A3431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\..\Sandbox">
+      <UniqueIdentifier>{AAB48CDF-1675-0816-DFAF-51934B2F4DF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="binmodules">
+      <UniqueIdentifier>{974FD9DD-8307-1B2B-EC0E-F486D8E5B51B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="binmodules\example">
+      <UniqueIdentifier>{7208F3A0-5EEC-B3F6-C74C-AE49B34F9E78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="binmodules\luasocket">
+      <UniqueIdentifier>{31986022-1D27-EAEB-C645-FEE6B2B3FA91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib">
+      <UniqueIdentifier>{16D079D3-82AF-F86E-8BC7-8345F7255FD0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib\curl">
+      <UniqueIdentifier>{DB17F84E-C77A-87F3-7000-C0A95C425376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib\libzip">
+      <UniqueIdentifier>{AF457A01-9B13-6E07-84A7-DE2D70144A6C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib\lua">
+      <UniqueIdentifier>{C78B8B9D-3341-0493-BC35-FE6928EAFA96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib\luashim">
+      <UniqueIdentifier>{38EFAA4C-A47A-1811-AD8B-9B0519967411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib\mbedtls">
+      <UniqueIdentifier>{D083936D-3C0F-0132-4520-8426B12A5D32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="contrib\zlib">
+      <UniqueIdentifier>{168D044F-02F0-93F3-AB75-CCA997B75F76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{78756B10-E489-93C1-AD0B-372119DF8FF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests\folder">
+      <UniqueIdentifier>{C38526F7-AFE8-B59B-586E-EE5144B0811E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Hazel\premake5.lua">
-      <Filter>..\Hazel</Filter>
+      <Filter>..\..\Hazel</Filter>
     </None>
     <None Include="..\..\Hazel\vendor\Box2D\premake5.lua">
-      <Filter>..\Hazel\vendor\Box2D</Filter>
+      <Filter>..\..\Hazel\vendor\Box2D</Filter>
     </None>
     <None Include="..\..\Hazel\vendor\GLFW\premake5.lua">
-      <Filter>..\Hazel\vendor\GLFW</Filter>
+      <Filter>..\..\Hazel\vendor\GLFW</Filter>
     </None>
     <None Include="..\..\Hazel\vendor\Glad\premake5.lua">
-      <Filter>..\Hazel\vendor\Glad</Filter>
+      <Filter>..\..\Hazel\vendor\Glad</Filter>
     </None>
     <None Include="..\..\Hazel\vendor\imgui\premake5.lua">
-      <Filter>..\Hazel\vendor\imgui</Filter>
+      <Filter>..\..\Hazel\vendor\imgui</Filter>
     </None>
     <None Include="..\..\Hazel\vendor\yaml-cpp\premake5.lua">
-      <Filter>..\Hazel\vendor\yaml-cpp</Filter>
+      <Filter>..\..\Hazel\vendor\yaml-cpp</Filter>
     </None>
     <None Include="..\..\Hazelnut\premake5.lua">
-      <Filter>..\Hazelnut</Filter>
+      <Filter>..\..\Hazelnut</Filter>
     </None>
     <None Include="..\..\Sandbox\premake5.lua">
-      <Filter>..\Sandbox</Filter>
+      <Filter>..\..\Sandbox</Filter>
     </None>
     <None Include="..\..\premake5.lua">
+      <Filter>..\..</Filter>
+    </None>
+    <None Include="..\premake5.lua">
       <Filter>..</Filter>
     </None>
+    <None Include="binmodules\example\premake5.lua">
+      <Filter>binmodules\example</Filter>
+    </None>
+    <None Include="binmodules\luasocket\premake5.lua">
+      <Filter>binmodules\luasocket</Filter>
+    </None>
+    <None Include="contrib\curl\premake5.lua">
+      <Filter>contrib\curl</Filter>
+    </None>
+    <None Include="contrib\libzip\premake5.lua">
+      <Filter>contrib\libzip</Filter>
+    </None>
+    <None Include="contrib\lua\premake5.lua">
+      <Filter>contrib\lua</Filter>
+    </None>
+    <None Include="contrib\luashim\premake5.lua">
+      <Filter>contrib\luashim</Filter>
+    </None>
+    <None Include="contrib\mbedtls\premake5.lua">
+      <Filter>contrib\mbedtls</Filter>
+    </None>
+    <None Include="contrib\zlib\premake5.lua">
+      <Filter>contrib\zlib</Filter>
+    </None>
     <None Include="premake5.lua" />
+    <None Include="tests\folder\premake5.lua">
+      <Filter>tests\folder</Filter>
+    </None>
   </ItemGroup>
 </Project>

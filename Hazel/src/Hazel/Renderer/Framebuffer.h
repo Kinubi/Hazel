@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Hazel/Core/Core.h"
+#include "Hazel/Core/Base.h"
 
 namespace Hazel {
 
@@ -26,6 +26,7 @@ namespace Hazel {
 			: TextureFormat(format) {}
 
 		FramebufferTextureFormat TextureFormat = FramebufferTextureFormat::None;
+		// TODO: filtering/wrap
 	};
 
 	struct FramebufferAttachmentSpecification
@@ -36,7 +37,6 @@ namespace Hazel {
 
 		std::vector<FramebufferTextureSpecification> Attachments;
 	};
-
 
 	struct FramebufferSpecification
 	{
@@ -50,7 +50,8 @@ namespace Hazel {
 	class Framebuffer
 	{
 	public:
-		//virtual ~Framebuffer() = 0;
+		virtual ~Framebuffer() = default;
+
 		virtual void Bind() = 0;
 		virtual void Unbind() = 0;
 
@@ -59,11 +60,12 @@ namespace Hazel {
 
 		virtual void ClearAttachment(uint32_t attachmentIndex, int value) = 0;
 
-		virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0)  const = 0;
+		virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const = 0;
 
 		virtual const FramebufferSpecification& GetSpecification() const = 0;
 
 		static Ref<Framebuffer> Create(const FramebufferSpecification& spec);
 	};
+
 
 }

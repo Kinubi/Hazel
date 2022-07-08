@@ -8,6 +8,7 @@ namespace Hazel {
 	{
 	public:
 		virtual ~ScriptableEntity() {}
+
 		template<typename T>
 		T& GetComponent()
 		{
@@ -23,3 +24,4 @@ namespace Hazel {
 	};
 
 }
+

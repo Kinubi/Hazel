@@ -1,9 +1,9 @@
 #pragma once
 
-#include "hzpch.h"
-
-#include "Hazel/Core/Core.h"
+#include "Hazel/Core/Base.h"
 #include "Hazel/Events/Event.h"
+
+#include <sstream>
 
 namespace Hazel {
 
@@ -14,8 +14,8 @@ namespace Hazel {
 		uint32_t Height;
 
 		WindowProps(const std::string& title = "Hazel Engine",
-			uint32_t width = 1280,
-			uint32_t height = 720)
+			        uint32_t width = 1600,
+			        uint32_t height = 900)
 			: Title(title), Width(width), Height(height)
 		{
 		}
@@ -43,4 +43,5 @@ namespace Hazel {
 
 		static Scope<Window> Create(const WindowProps& props = WindowProps());
 	};
+
 }

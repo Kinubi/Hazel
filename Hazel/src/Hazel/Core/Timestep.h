@@ -9,7 +9,7 @@ namespace Hazel {
 			: m_Time(time)
 		{
 		}
-		
+
 		operator float() const { return m_Time; }
 
 		float GetSeconds() const { return m_Time; }

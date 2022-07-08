@@ -1,13 +1,10 @@
 #pragma once
 
+#include "Hazel/Core/UUID.h"
 #include "Scene.h"
 #include "Components.h"
 
 #include "entt.hpp"
-
-#include "Hazel/Core/UUID.h"
-
-
 
 namespace Hazel {
 

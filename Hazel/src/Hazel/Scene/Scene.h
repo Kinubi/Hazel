@@ -1,11 +1,10 @@
 #pragma once
 
-#include "entt.hpp"
-#include "Hazel/Renderer/EditorCamera.h"
-#include "Hazel/Core/UUID.h"
-
-
 #include "Hazel/Core/Timestep.h"
+#include "Hazel/Core/UUID.h"
+#include "Hazel/Renderer/EditorCamera.h"
+
+#include "entt.hpp"
 
 class b2World;
 
@@ -55,7 +54,7 @@ namespace Hazel {
 		void RenderScene(EditorCamera& camera);
 	private:
 		entt::registry m_Registry;
-		uint32_t m_ViewportWidth = 0.0f, m_ViewportHeight = 0.0f;
+		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
 		b2World* m_PhysicsWorld = nullptr;
 

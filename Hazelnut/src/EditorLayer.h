@@ -4,7 +4,6 @@
 #include "Panels/SceneHierarchyPanel.h"
 #include "Panels/ContentBrowserPanel.h"
 
-
 #include "Hazel/Renderer/EditorCamera.h"
 
 namespace Hazel {
@@ -24,21 +23,20 @@ namespace Hazel {
 	private:
 		bool OnKeyPressed(KeyPressedEvent& e);
 		bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
-
+		
 		void OnOverlayRender();
 
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
-		void SaveSceneAs();
 		void SaveScene();
+		void SaveSceneAs();
 
 		void SerializeScene(Ref<Scene> scene, const std::filesystem::path& path);
 
 		void OnScenePlay();
-		void OnSceneStop();
-
 		void OnSceneSimulate();
+		void OnSceneStop();
 
 		void OnDuplicateEntity();
 
@@ -53,12 +51,12 @@ namespace Hazel {
 		Ref<Framebuffer> m_Framebuffer;
 
 		Ref<Scene> m_ActiveScene;
-		Ref<Scene> m_EditorScene, m_RuntimeScene;
+		Ref<Scene> m_EditorScene;
 		std::filesystem::path m_EditorScenePath;
 		Entity m_SquareEntity;
 		Entity m_CameraEntity;
 		Entity m_SecondCamera;
-
+		
 		Entity m_HoveredEntity;
 
 		bool m_PrimaryCamera = true;
@@ -81,7 +79,6 @@ namespace Hazel {
 		{
 			Edit = 0, Play = 1, Simulate = 2
 		};
-
 		SceneState m_SceneState = SceneState::Edit;
 
 		// Panels
@@ -89,8 +86,7 @@ namespace Hazel {
 		ContentBrowserPanel m_ContentBrowserPanel;
 
 		// Editor resources
-
-		Ref<Texture2D> m_IconPlay, m_IconStop, m_IconSimulate;
+		Ref<Texture2D> m_IconPlay, m_IconSimulate, m_IconStop;
 	};
 
 }

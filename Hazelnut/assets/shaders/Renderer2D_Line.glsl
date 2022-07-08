@@ -1,4 +1,7 @@
-// Basic Texture Shader
+//--------------------------
+// - Hazel 2D -
+// Renderer2D Line Shader
+// --------------------------
 
 #type vertex
 #version 450 core
@@ -17,8 +20,8 @@ struct VertexOutput
 	vec4 Color;
 };
 
-layout(location = 0) out VertexOutput Output;
-layout(location = 1) out flat int v_EntityID;
+layout (location = 0) out VertexOutput Output;
+layout (location = 1) out flat int v_EntityID;
 
 void main()
 {
@@ -39,16 +42,11 @@ struct VertexOutput
 	vec4 Color;
 };
 
-layout(location = 0) in VertexOutput Input;
-layout(location = 1) in flat int v_EntityID;
-
-
+layout (location = 0) in VertexOutput Input;
+layout (location = 1) in flat int v_EntityID;
 
 void main()
 {
-
 	o_Color = Input.Color;
-	
-
 	o_EntityID = v_EntityID;
 }

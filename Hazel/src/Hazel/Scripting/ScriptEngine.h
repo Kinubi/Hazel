@@ -20,7 +20,7 @@ namespace Hazel {
 	{
 	public:
 		ScriptClass() = default;
-		ScriptClass(const std::string& classNamespace, const std::string& className);
+		ScriptClass(const std::string& classNamespace, const std::string& className, bool isCore = false);
 
 		MonoObject* Instantiate();
 		MonoMethod* GetMethod(const std::string& name, int parameterCount);
@@ -31,7 +31,6 @@ namespace Hazel {
 
 		MonoClass* m_MonoClass = nullptr;
 	};
-
 
 	class ScriptInstance
 	{
@@ -49,7 +48,6 @@ namespace Hazel {
 		MonoMethod* m_OnUpdateMethod = nullptr;
 	};
 
-
 	class ScriptEngine
 	{
 	public:
@@ -57,25 +55,28 @@ namespace Hazel {
 		static void Shutdown();
 
 		static void LoadAssembly(const std::filesystem::path& filepath);
+		static void LoadAppAssembly(const std::filesystem::path& filepath);
+
 		static void OnRuntimeStart(Scene* scene);
 		static void OnRuntimeStop();
 
-		static bool EntityClassExists(std::string& fullClassName);
+		static bool EntityClassExists(const std::string& fullClassName);
 		static void OnCreateEntity(Entity entity);
 		static void OnUpdateEntity(Entity entity, Timestep ts);
 
 		static Scene* GetSceneContext();
-		static std::unordered_map < std::string, Ref<ScriptClass>> GetEntityClasses();
+		static std::unordered_map<std::string, Ref<ScriptClass>> GetEntityClasses();
+
 		static MonoImage* GetCoreAssemblyImage();
 	private:
 		static void InitMono();
 		static void ShutdownMono();
 
 		static MonoObject* InstantiateClass(MonoClass* monoClass);
-		static void LoadAssemblyClasses(MonoAssembly* assembly);
-
+		static void LoadAssemblyClasses();
 
 		friend class ScriptClass;
 		friend class ScriptGlue;
 	};
+
 }

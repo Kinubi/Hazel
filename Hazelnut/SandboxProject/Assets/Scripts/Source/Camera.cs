@@ -10,9 +10,25 @@ namespace Sandbox
 {
 	public class Camera : Entity
 	{
-		void OnUpdate(float ts)
+        public float DistanceFromPlayer = 5.0f;
+        void OnCreate()
 		{
-			float speed = 1.0f;
+            Translation = new Vector3(Translation.XY, DistanceFromPlayer);
+        }
+        
+        void OnUpdate(float ts)
+		{
+            Entity player = FindEntityByName("Player");
+            if (player != null)
+            {
+                Translation = new Vector3(player.Translation.XY, DistanceFromPlayer);
+            }
+            else
+            {
+                Console.WriteLine("none");
+            }
+
+            float speed = 1.0f;
 			Vector3 velocity = Vector3.Zero;
 
 			if (Input.IsKeyDown(KeyCode.Up))
@@ -25,7 +41,19 @@ namespace Sandbox
 			else if (Input.IsKeyDown(KeyCode.Right))
 				velocity.X = 1.0f;
 
-			velocity *= speed;
+			Entity cameraEntity = FindEntityByName("Camera");
+			if (cameraEntity != null)
+			{
+				Camera camera = cameraEntity.As<Camera>();
+                if (Input.IsKeyDown(KeyCode.Q))
+                    camera.DistanceFromPlayer += speed * ts;
+                else if (Input.IsKeyDown(KeyCode.E))
+                    camera.DistanceFromPlayer -= speed * ts;
+            }
+
+			
+
+            velocity *= speed;
 
 			Vector3 translation = Translation;
 			translation += velocity * ts;

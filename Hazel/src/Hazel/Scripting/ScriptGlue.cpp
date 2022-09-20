@@ -28,6 +28,26 @@ namespace Hazel {
 		return s_EntityHasComponentFuncs.at(managedType)(entity);
 	}
 
+	static uint64_t Entity_FindEntityByName(MonoString* name)
+	{
+		char* nameCStr = mono_string_to_utf8(name);
+
+		Scene* scene = ScriptEngine::GetSceneContext();
+		HZ_CORE_ASSERT(scene);
+		Entity entity = scene->FindEntityByName(nameCStr);
+		mono_free(nameCStr);
+
+		if (!entity)
+			return 0;
+
+		return entity.GetUUID();
+	}
+
+	static MonoObject* GetScriptInstance(UUID entityUUID)
+	{
+		return ScriptEngine::GetManagedInstance(entityUUID);
+	}
+
 	static void TransformComponent_GetTranslation(UUID entityUUID, glm::vec3* outTranslation)
 	{
 		Scene* scene = ScriptEngine::GetSceneContext();
@@ -99,6 +119,8 @@ namespace Hazel {
 	void ScriptGlue::RegisterFunctions()
 	{
 		HZ_ADD_INTERNAL_CALL(Entity_HasComponent);
+		HZ_ADD_INTERNAL_CALL(Entity_FindEntityByName);
+		HZ_ADD_INTERNAL_CALL(GetScriptInstance);
 		HZ_ADD_INTERNAL_CALL(TransformComponent_GetTranslation);
 		HZ_ADD_INTERNAL_CALL(TransformComponent_SetTranslation);
 		HZ_ADD_INTERNAL_CALL(Rigidbody2DComponent_ApplyLinearImpulse);

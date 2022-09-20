@@ -8,16 +8,21 @@ namespace Sandbox
         private TransformComponent m_Transform;
         private Rigidbody2DComponent m_Rigidbody;
         public float speed;
+
+        
         void OnCreate()
         {
             Console.WriteLine($"Player.OnCreate - {ID}");
 
             m_Transform = GetComponent<TransformComponent>();
             m_Rigidbody = GetComponent<Rigidbody2DComponent>();
+
+            
         }
 
         void OnUpdate(float ts)
         {
+    
             // Console.WriteLine($"Player.OnUpdate: {ts}");
 
             //speed = 0.01f;
@@ -33,7 +38,7 @@ namespace Sandbox
             else if (Input.IsKeyDown(KeyCode.D))
                 velocity.X = -1.0f;
 
-            velocity *= speed;
+            velocity *= speed * ts;
 
             m_Rigidbody.ApplyLinearImpulse(velocity.XY, Vector2.Zero, true);
 

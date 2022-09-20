@@ -433,7 +433,7 @@ namespace Hazel {
 				{ 
 					auto& cc = deserializedEntity.AddComponent<CameraComponent>(); 
 
-					auto cameraProps = cameraComponent["Camera"]; 
+					const auto& cameraProps = cameraComponent["Camera"]; 
 					cc.Camera.SetProjectionType((SceneCamera::ProjectionType)cameraProps["ProjectionType"].as<int>()); 
 					cc.Camera.SetPerspectiveVerticalFOV(cameraProps["PerspectiveFOV"].as<float>()); 
 					cc.Camera.SetPerspectiveNearClip(cameraProps["PerspectiveNear"].as<float>()); 
@@ -468,7 +468,7 @@ namespace Hazel {
 							ScriptFieldInstance& fieldInstance = entityFields[name];
 
 							// TODO(Yan): turn this assert into Hazelnut log warning
-							HZ_CORE_ASSERT(fields.find(name) != fields.end());
+							//HZ_CORE_ASSERT(fields.find(name) != fields.end());
 
 							if (fields.find(name) == fields.end())
 								continue;

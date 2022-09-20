@@ -38,6 +38,7 @@ namespace Hazel {
 		void DuplicateEntity(Entity entity);
 
 		Entity GetEntityByUUID(UUID uuid);
+		Entity FindEntityByName(std::string_view name);
 
 		Entity GetPrimaryCameraEntity();
 

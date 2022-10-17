@@ -2,6 +2,9 @@
 #include "ScriptEngine.h"
 
 #include "ScriptGlue.h"
+#include "Hazel/Core/Application.h"
+
+#include "FileWatch.h"
 
 #include "mono/jit/jit.h"
 #include "mono/metadata/assembly.h"
@@ -141,6 +144,9 @@ namespace Hazel {
 		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
 		std::unordered_map<UUID, ScriptFieldMap> EntityScriptFields;
 
+		Scope<filewatch::FileWatch<std::string>> AppAssemblyFileWatcher;
+		bool AssemblyReloadPending = false;
+
 		// Runtime
 
 		Scene* SceneContext = nullptr;
@@ -196,6 +202,7 @@ namespace Hazel {
 
 		HZ_CORE_ASSERT(false);
 #endif
+
 	}
 
 	void ScriptEngine::Shutdown()
@@ -239,6 +246,21 @@ namespace Hazel {
 		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
 
+	static void OnAppAssemblyFileSystemEvent(const std::string& path, const filewatch::Event change_type)
+	{
+		if (!s_Data->AssemblyReloadPending && change_type == filewatch::Event::modified)
+		{
+			s_Data->AssemblyReloadPending = true;
+
+			// reload assembly
+			// add reload to main thread queue
+			Application::Get().SubmitToMainThread([]()
+				{
+					s_Data->AppAssemblyFileWatcher.reset();
+					ScriptEngine::ReloadAssembly();
+				});
+		}
+	}
 
 	void ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
 	{
@@ -249,6 +271,9 @@ namespace Hazel {
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
 		auto assembi = s_Data->AppAssemblyImage;
 		// Utils::PrintAssemblyTypes(s_Data->AppAssembly);
+
+		s_Data->AppAssemblyFileWatcher = CreateScope<filewatch::FileWatch<std::string>>(filepath.string(), OnAppAssemblyFileSystemEvent);
+		s_Data->AssemblyReloadPending = false;
 	}
 
 	void ScriptEngine::ReloadAssembly()

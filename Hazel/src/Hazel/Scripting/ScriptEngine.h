@@ -172,7 +172,7 @@ namespace Hazel {
 
 		static MonoObject* InstantiateClass(MonoClass* monoClass);
 		static void LoadAssemblyClasses();
-
+		
 		friend class ScriptClass;
 		friend class ScriptGlue;
 	};

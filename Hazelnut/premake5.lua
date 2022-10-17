@@ -19,6 +19,7 @@ project "Hazelnut"
 		"%{wks.location}/Hazel/src",
 		"%{wks.location}/Hazel/vendor",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.filewatch}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.ImGuizmo}"
 	}

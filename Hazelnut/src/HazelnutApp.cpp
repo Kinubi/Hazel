@@ -21,6 +21,8 @@ namespace Hazel {
 		spec.Name = "Hazelnut";
 		spec.CommandLineArgs = args;
 
+		
+
 		return new Hazelnut(spec);
 	}
 

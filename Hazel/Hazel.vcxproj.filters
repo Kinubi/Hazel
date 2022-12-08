@@ -34,6 +34,9 @@
     <Filter Include="src\Hazel\Scripting">
       <UniqueIdentifier>{F258AC9D-5EBA-89AB-E727-D05D5388C06A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Hazel\UI">
+      <UniqueIdentifier>{1D45776D-09A8-0612-B22D-3FC89E6FD294}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Hazel\Utils">
       <UniqueIdentifier>{506D16B4-BCF8-8378-C509-076D3114E078}</UniqueIdentifier>
     </Filter>
@@ -230,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="src\Hazel\Scripting\ScriptGlue.h">
       <Filter>src\Hazel\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\UI\UI.h">
+      <Filter>src\Hazel\UI</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Utils\PlatformUtils.h">
       <Filter>src\Hazel\Utils</Filter>

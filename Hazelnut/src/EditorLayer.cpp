@@ -49,7 +49,11 @@ namespace Hazel {
 		else
 		{
 			// Prompt the user to select a directory
-			NewProject();
+			if (!OpenProject())
+			{
+				Application::Get().Close();
+			}
+
 		}
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
@@ -192,12 +196,14 @@ namespace Hazel {
 			{
 				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
 				// which we can't undo at the moment without finer window depth/z control.
-				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);1
+				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+				if (ImGui::MenuItem("Open Project", "Ctrl+O"))
+					OpenProject(); 
+
+				ImGui::Separator();
+
 				if (ImGui::MenuItem("New", "Ctrl+N"))
 					NewScene();
-
-				if (ImGui::MenuItem("Open...", "Ctrl+O"))
-					OpenScene();
 
 				if (ImGui::MenuItem("Save", "Ctrl+S"))
 					SaveScene();
@@ -441,7 +447,7 @@ namespace Hazel {
 			case Key::O:
 			{
 				if (control)
-					OpenScene();
+					OpenProject();
 
 				break;
 			}
@@ -571,6 +577,16 @@ namespace Hazel {
 	void EditorLayer::NewProject()
 	{
 		Project::New();
+	}
+
+	bool EditorLayer::OpenProject()
+	{
+		std::string filepath = FileDialogs::OpenFile("Hazel Project (*.hproj)\0*.hproj\0");
+		if (filepath.empty())
+			return false;
+		
+		OpenProject(filepath);
+		return true;
 	}
 
 	void EditorLayer::OpenProject(const std::filesystem::path& path)

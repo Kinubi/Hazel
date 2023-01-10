@@ -29,6 +29,16 @@ namespace Hazel
 		{
 			return new Vector2(a.X + b.X, a.Y + b.Y);
 		}
+
+		public float LengthSquared()
+		{ 
+			return X * X + Y * Y;
+		}
+
+		public float Length()
+		{
+			return (float)Math.Sqrt(LengthSquared());
+		}
 	}
 
 }

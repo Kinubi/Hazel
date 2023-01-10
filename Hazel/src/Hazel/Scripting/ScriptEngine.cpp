@@ -16,6 +16,7 @@
 #include "Hazel/Core/Timer.h"
 #include "Hazel/Core/Buffer.h"
 #include "Hazel/Core/FileSystem.h"
+#include "Hazel/Project/Project.h"
 
 namespace Hazel {
 
@@ -169,7 +170,10 @@ namespace Hazel {
 			HZ_CORE_ERROR("[ScriptEngine] Could not load Hazel-ScriptCore assembly");
 			return;
 		}
-		status = LoadAppAssembly("SandboxProject/Assets/Scripts/Binaries/Sandbox.dll");
+
+		std::filesystem::path scriptModulePath = Project::GetAssetDirectory() / Project::GetActive()->GetConfig().ScriptModulePath;
+
+		status = LoadAppAssembly(scriptModulePath);
 		if (!status)
 		{
 			HZ_CORE_ERROR("[ScriptEngine] Could not load app assembly");

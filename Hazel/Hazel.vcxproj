@@ -170,6 +170,7 @@
     <ClInclude Include="src\Hazel\Events\MouseEvent.h" />
     <ClInclude Include="src\Hazel\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Hazel\Math\Math.h" />
+    <ClInclude Include="src\Hazel\Physics\Physics2D.h" />
     <ClInclude Include="src\Hazel\Project\Project.h" />
     <ClInclude Include="src\Hazel\Project\ProjectSerializer.h" />
     <ClInclude Include="src\Hazel\Renderer\Buffer.h" />

@@ -31,6 +31,7 @@ group "Dependencies"
 	include "Hazel/vendor/imgui"
 	include "Hazel/vendor/yaml-cpp"
 	include "Hazel/vendor/Box2D"
+	include "Hazel/vendor/msdf-atlas-gen"
 group ""
 
 group "Core"

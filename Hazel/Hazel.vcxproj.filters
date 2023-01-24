@@ -22,6 +22,9 @@
     <Filter Include="src\Hazel\Math">
       <UniqueIdentifier>{C91259A8-B5E0-4CAE-9E74-BDD48AE12813}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Hazel\Physics">
+      <UniqueIdentifier>{622BAB77-CE41-A90D-17B9-342F830E7A95}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Hazel\Project">
       <UniqueIdentifier>{36CC448E-A2E2-4224-EB59-CE4557AF13AC}</UniqueIdentifier>
     </Filter>
@@ -156,6 +159,9 @@
     <ClInclude Include="src\Hazel\Math\Math.h">
       <Filter>src\Hazel\Math</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hazel\Physics\Physics2D.h">
+      <Filter>src\Hazel\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="src\Hazel\Project\Project.h">
       <Filter>src\Hazel\Project</Filter>
     </ClInclude>
@@ -169,6 +175,9 @@
       <Filter>src\Hazel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Renderer\EditorCamera.h">
+      <Filter>src\Hazel\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Renderer\Font.h">
       <Filter>src\Hazel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Renderer\Framebuffer.h">
@@ -1524,7 +1533,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Physics\Physics2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hazel\Core\Application.cpp">
@@ -1567,6 +1575,9 @@
       <Filter>src\Hazel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\Renderer\EditorCamera.cpp">
+      <Filter>src\Hazel\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Renderer\Font.cpp">
       <Filter>src\Hazel\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\Renderer\Framebuffer.cpp">

@@ -44,6 +44,8 @@ project "Hazel"
 		"%{IncludeDir.mono}",
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}",
 		"%{IncludeDir.VulkanSDK}"
 	}
 
@@ -53,6 +55,7 @@ project "Hazel"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"msdf-atlas-gen",
 		"yaml-cpp",
 		"opengl32.lib",
 		"%{Library.mono}"

@@ -25,6 +25,12 @@
     <Filter Include="..\..\Hazel\vendor\imgui">
       <UniqueIdentifier>{B684FB48-A2A9-4AC9-CBF4-2F59B77849E7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="..\..\Hazel\vendor\msdf-atlas-gen">
+      <UniqueIdentifier>{AE5638EE-1AC5-8D6D-63AE-486DCF5B8309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\..\Hazel\vendor\msdf-atlas-gen\msdfgen">
+      <UniqueIdentifier>{219DF1DA-8DB7-547C-D6D9-641042337C83}</UniqueIdentifier>
+    </Filter>
     <Filter Include="..\..\Hazel\vendor\yaml-cpp">
       <UniqueIdentifier>{7E2A8069-EA37-AE4F-731E-AA3ADF2A7A06}</UniqueIdentifier>
     </Filter>
@@ -101,6 +107,12 @@
     </None>
     <None Include="..\..\Hazel\vendor\imgui\premake5.lua">
       <Filter>..\..\Hazel\vendor\imgui</Filter>
+    </None>
+    <None Include="..\..\Hazel\vendor\msdf-atlas-gen\msdfgen\premake5.lua">
+      <Filter>..\..\Hazel\vendor\msdf-atlas-gen\msdfgen</Filter>
+    </None>
+    <None Include="..\..\Hazel\vendor\msdf-atlas-gen\premake5.lua">
+      <Filter>..\..\Hazel\vendor\msdf-atlas-gen</Filter>
     </None>
     <None Include="..\..\Hazel\vendor\yaml-cpp\premake5.lua">
       <Filter>..\..\Hazel\vendor\yaml-cpp</Filter>

@@ -26,6 +26,11 @@ namespace Hazel {
 		
 		void OnOverlayRender();
 
+		void NewProject();
+		bool OpenProject();
+		void OpenProject(const std::filesystem::path& path);
+		void SaveProject();
+
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
@@ -67,7 +72,7 @@ namespace Hazel {
 		Ref<Texture2D> m_CheckerboardTexture;
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
-		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
+		glm::vec2 m_ViewportSize = { 1.0f, 1.0f };
 		glm::vec2 m_ViewportBounds[2];
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
@@ -84,7 +89,7 @@ namespace Hazel {
 
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
-		ContentBrowserPanel m_ContentBrowserPanel;
+		Scope<ContentBrowserPanel> m_ContentBrowserPanel;
 
 		// Editor resources
 		Ref<Texture2D> m_IconPlay, m_IconPause, m_IconStep, m_IconSimulate, m_IconStop;

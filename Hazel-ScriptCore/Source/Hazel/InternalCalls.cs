@@ -23,7 +23,19 @@ namespace Hazel
 		[MethodImplAttribute(MethodImplOptions.InternalCall)]
 		internal extern static void Rigidbody2DComponent_ApplyLinearImpulse(ulong entityID, ref Vector2 impulse, ref Vector2 point, ref bool wake);
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Rigidbody2DComponent_ApplyLinearImpulseToCenter(ulong entityID, ref Vector2 impulse, ref bool wake);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+		internal extern static void Rigidbody2DComponent_GetLinearVelocity(ulong entityID, out Vector2 linearVelocity);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static Rigidbody2DComponent.BodyType Rigidbody2DComponent_GetType(ulong entityID);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Rigidbody2DComponent_SetType(ulong entityID, Rigidbody2DComponent.BodyType bodyType);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
 		internal extern static bool Input_IsKeyDown(KeyCode keycode);
 
 	}

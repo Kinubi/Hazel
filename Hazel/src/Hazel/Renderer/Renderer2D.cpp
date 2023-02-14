@@ -9,6 +9,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Hazel/Renderer/MSDFData.h"
+
 namespace Hazel {
 
 	struct QuadVertex
@@ -493,6 +495,53 @@ namespace Hazel {
 			DrawQuad(transform, src.Texture, src.TilingFactor, src.Color, entityID);
 		else
 			DrawQuad(transform, src.Color, entityID);
+	}
+
+	void Renderer2D::DrawString(const std::string& string, Ref<Font> font, const glm::mat4& transform, const glm::vec4& color)
+	{
+		const auto& fontGeometry = font->GetMSDFData()->FontGeometry;
+		const auto& metrics = fontGeometry.getMetrics();
+		Ref<Texture2D> fontAtlas = font->GetAtlasTexture();
+
+		double x = 0.0f;
+		double fsScale = 1.0f / (metrics.ascenderY - metrics.descenderY);
+		double y = -fsScale * metrics.ascenderY;
+
+		char character = 'C';
+		auto glyph = fontGeometry.getGlyph(character);
+		if (!glyph)
+			glyph = fontGeometry.getGlyph('?');
+		if (!glyph)
+			return; 
+
+		double al, ab, ar, at;
+		glyph->getQuadAtlasBounds(al, ab, ar, at);
+		glm::vec2 textCoordMin((float)al, (float)ab);
+		glm::vec2 textCoordMax((float)ar, (float)at);
+
+		double pl, pb, pr, pt;
+		glyph->getQuadPlaneBounds(pl, pb, pr, pt);
+		glm::vec2 quadMin((float)pl, (float)pb);
+		glm::vec2 quadMax((float)pr, (float)pt);
+
+		quadMin *= fsScale, quadMax *= fsScale;
+		quadMin += glm::vec2(x, y), quadMax += glm::vec2(x, y);
+		pl *= fsScale, pb *= fsScale, pr *= fsScale, pt *= fsScale;
+		pl += x, pb += y, pr += x, pt += y;
+
+		float texelWidth = 1.0f / fontAtlas->GetWidth();
+		float texelHeight = 1.0f / fontAtlas->GetHeight();
+		textCoordMin *= glm::vec2(texelWidth, texelHeight);
+		textCoordMax *= glm::vec2(texelWidth, texelHeight);
+
+		// render here
+
+		double advance = glyph->getAdvance();
+		char nextCharacter = 'C';
+		fontGeometry.getAdvance(advance, character, nextCharacter);
+
+		float kerningOffset = 0.0f;
+		x += fsScale * advance + kerningOffset;
 	}
 
 	float Renderer2D::GetLineWidth()

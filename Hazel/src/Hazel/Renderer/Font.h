@@ -4,6 +4,9 @@
 #include <Hazel/Renderer/Texture.h>
 #include <filesystem>
 
+
+#include "Hazel/Renderer/Texture.h"
+
 namespace Hazel {
 
 	struct MSDFData;
@@ -14,6 +17,7 @@ namespace Hazel {
 		Font(const std::filesystem::path& filepath);
 		~Font();
 
+		const MSDFData* GetMSDFData() const { return m_Data; }
 		Ref<Texture2D> GetAtlasTexture() const { return m_AtlasTexture; }
 
 	private:

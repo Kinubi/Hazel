@@ -141,4 +141,15 @@ namespace Hazel {
         delete m_Data;
     }
 
+    Ref<Font> Font::GetDefault()
+    {
+        static Ref<Font> DefaultFont;
+        if (!DefaultFont)
+        {
+            DefaultFont = CreateRef<Font>("C:/Users/baren/source/repos/Hazel/Hazelnut/assets/fonts/OpenSans-Regular.ttf");
+        }
+
+        return DefaultFont;
+    }
+
 }

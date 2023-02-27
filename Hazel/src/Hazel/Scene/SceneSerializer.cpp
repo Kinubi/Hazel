@@ -354,6 +354,20 @@ namespace Hazel {
 			out << YAML::EndMap; // CircleCollider2DComponent
 		}
 
+		if (entity.HasComponent<TextComponent>())
+		{
+			out << YAML::Key << "TextComponent";
+			out << YAML::BeginMap; // TextComponent
+
+			auto& tComponent = entity.GetComponent<TextComponent>();
+			out << YAML::Key << "TextString" << YAML::Value << tComponent.TextString;
+			out << YAML::Key << "Color" << YAML::Value << tComponent.Color;
+			out << YAML::Key << "Kerning" << YAML::Value << tComponent.Kerning;
+			out << YAML::Key << "LineSpacing" << YAML::Value << tComponent.LineSpacing;
+
+			out << YAML::EndMap; // Rigidbody2DComponent
+		}
+
 		out << YAML::EndMap; // Entity
 	}
 
@@ -557,6 +571,16 @@ namespace Hazel {
 					cc2d.Friction = circleCollider2DComponent["Friction"].as<float>();
 					cc2d.Restitution = circleCollider2DComponent["Restitution"].as<float>();
 					cc2d.RestitutionThreshold = circleCollider2DComponent["RestitutionThreshold"].as<float>();
+				}
+
+				auto textComponent = entity["TextComponent"];
+				if (textComponent)
+				{
+					auto& tc = deserializedEntity.AddComponent<TextComponent>();
+					tc.TextString = textComponent["TextString"].as<std::string>();
+					tc.Color = textComponent["Color"].as<glm::vec4>();
+					tc.Kerning = textComponent["Kerning"].as<float>();
+					tc.LineSpacing = textComponent["Kerning"].as<float>();
 				}
 			}
 		}

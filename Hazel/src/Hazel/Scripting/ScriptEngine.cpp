@@ -452,6 +452,11 @@ namespace Hazel {
 		return instance;
 	}
 
+	MonoString* ScriptEngine::CreateString(std::string_view string)
+	{
+		return mono_string_new(s_Data->AppDomain, string.data());
+	}
+
 	ScriptClass::ScriptClass(const std::string& classNamespace, const std::string& className, bool isCore)
 		: m_ClassNamespace(classNamespace), m_ClassName(className)
 	{

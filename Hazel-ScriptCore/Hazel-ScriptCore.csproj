@@ -63,6 +63,7 @@
     <Compile Include="Source\Hazel\Scene\Entity.cs" />
     <Compile Include="Source\Hazel\Vector2.cs" />
     <Compile Include="Source\Hazel\Vector3.cs" />
+    <Compile Include="Source\Hazel\Vector4.cs" />
     <Compile Include="Source\Player.cs" />
   </ItemGroup>
   <ItemGroup>

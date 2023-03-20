@@ -14,6 +14,7 @@ extern "C" {
 	typedef struct _MonoAssembly MonoAssembly;
 	typedef struct _MonoImage MonoImage;
 	typedef struct _MonoClassField MonoClassField;
+	typedef struct _MonoString MonoString;
 }
 
 namespace Hazel {
@@ -166,6 +167,8 @@ namespace Hazel {
 		static MonoImage* GetCoreAssemblyImage();
 
 		static MonoObject* GetManagedInstance(UUID uuid);
+
+		static MonoString* CreateString(std::string_view string);
 	private:
 		static void InitMono();
 		static void ShutdownMono();

@@ -432,6 +432,7 @@ namespace Hazel {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(HZ_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 		dispatcher.Dispatch<MouseButtonPressedEvent>(HZ_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
+		dispatcher.Dispatch<WindowDropEvent>(HZ_BIND_EVENT_FN(EditorLayer::OnWindowDrop));
 	}
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
@@ -531,6 +532,16 @@ namespace Hazel {
 				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
 		}
 		return false;
+	}
+
+	bool EditorLayer::OnWindowDrop(WindowDropEvent& e)
+	{
+		for (const auto& path : e.GetPaths())
+		{
+			HZ_CORE_INFO(path);
+		}
+
+		return true;
 	}
 
 	void EditorLayer::OnOverlayRender()

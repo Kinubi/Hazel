@@ -144,7 +144,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Hazel\Asset\Asset.h" />
+    <ClInclude Include="src\Hazel\Asset\EditorAssetManager.h" />
+    <ClInclude Include="src\Hazel\Asset\RuntimeAssetManager.h" />
+    <ClInclude Include="src\Hazel\Asset\AssetManager.h" />
     <ClInclude Include="src\Hazel.h" />
+    <ClInclude Include="src\Hazel\Asset\AssetManagerBase.h" />
     <ClInclude Include="src\Hazel\Core\Application.h" />
     <ClInclude Include="src\Hazel\Core\Assert.h" />
     <ClInclude Include="src\Hazel\Core\Base.h" />
@@ -631,6 +636,11 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Hazel\Asset\Asset.cpp" />
+    <ClCompile Include="src\Hazel\Asset\EditorAssetManager.cpp" />
+    <ClCompile Include="src\Hazel\Asset\RuntimeAssetManager.cpp" />
+    <ClCompile Include="src\Hazel\Asset\AssetManager.cpp" />
+    <ClCompile Include="src\Hazel\Asset\AssetManagerBase.cpp" />
     <ClCompile Include="src\Hazel\Core\Application.cpp" />
     <ClCompile Include="src\Hazel\Core\FileSystem.cpp" />
     <ClCompile Include="src\Hazel\Core\Layer.cpp" />

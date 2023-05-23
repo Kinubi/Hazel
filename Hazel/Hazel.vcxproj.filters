@@ -1536,6 +1536,11 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\AssetManager.h" />
+    <ClInclude Include="src\Hazel\Asset\AssetManagerBase.h" />
+    <ClInclude Include="src\Hazel\Asset\RuntimeAssetManager.h" />
+    <ClInclude Include="src\Hazel\Asset\EditorAssetManager.h" />
+    <ClInclude Include="src\Hazel\Asset\Asset.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hazel\Core\Application.cpp">
@@ -1682,5 +1687,10 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\AssetManager.cpp" />
+    <ClCompile Include="src\Hazel\Asset\AssetManagerBase.cpp" />
+    <ClCompile Include="src\Hazel\Asset\RuntimeAssetManager.cpp" />
+    <ClCompile Include="src\Hazel\Asset\EditorAssetManager.cpp" />
+    <ClCompile Include="src\Hazel\Asset\Asset.cpp" />
   </ItemGroup>
 </Project>

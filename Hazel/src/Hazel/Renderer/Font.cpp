@@ -35,7 +35,7 @@ namespace Hazel {
         textureSpecification.GenerateMips = false;
 
         Ref<Texture2D> texture = Texture2D::Create(textureSpecification);
-        texture->SetData((void*)bitmap.pixels, bitmap.width * bitmap.height * 3);
+        texture->SetData(Buffer((void*)bitmap.pixels, bitmap.width * bitmap.height * 3));
         return texture;
     }
 

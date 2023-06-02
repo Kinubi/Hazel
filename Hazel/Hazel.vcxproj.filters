@@ -7,6 +7,9 @@
     <Filter Include="src\Hazel">
       <UniqueIdentifier>{F0370AB3-5CA2-BE29-A5E0-6FCF118A9C7E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Hazel\Asset">
+      <UniqueIdentifier>{7F20ACB2-EBAB-1977-F4BC-9C6B60C77577}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Hazel\Core">
       <UniqueIdentifier>{48D253A8-34A0-47AE-1D34-B8D409A12313}</UniqueIdentifier>
     </Filter>
@@ -83,6 +86,30 @@
   <ItemGroup>
     <ClInclude Include="src\Hazel.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\Asset.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\AssetImporter.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\AssetManager.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\AssetManagerBase.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\AssetMetadata.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\EditorAssetManager.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\RuntimeAssetManager.h">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hazel\Asset\TextureImporter.h">
+      <Filter>src\Hazel\Asset</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Core\Application.h">
       <Filter>src\Hazel\Core</Filter>
@@ -1536,13 +1563,29 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Asset\AssetManager.h" />
-    <ClInclude Include="src\Hazel\Asset\AssetManagerBase.h" />
-    <ClInclude Include="src\Hazel\Asset\RuntimeAssetManager.h" />
-    <ClInclude Include="src\Hazel\Asset\EditorAssetManager.h" />
-    <ClInclude Include="src\Hazel\Asset\Asset.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Hazel\Asset\Asset.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\AssetImporter.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\AssetManager.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\AssetManagerBase.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\EditorAssetManager.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\RuntimeAssetManager.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hazel\Asset\TextureImporter.cpp">
+      <Filter>src\Hazel\Asset</Filter>
+    </ClCompile>
     <ClCompile Include="src\Hazel\Core\Application.cpp">
       <Filter>src\Hazel\Core</Filter>
     </ClCompile>
@@ -1687,10 +1730,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Hazel\Asset\AssetManager.cpp" />
-    <ClCompile Include="src\Hazel\Asset\AssetManagerBase.cpp" />
-    <ClCompile Include="src\Hazel\Asset\RuntimeAssetManager.cpp" />
-    <ClCompile Include="src\Hazel\Asset\EditorAssetManager.cpp" />
-    <ClCompile Include="src\Hazel\Asset\Asset.cpp" />
   </ItemGroup>
 </Project>

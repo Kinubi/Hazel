@@ -1,5 +1,7 @@
 #include "hzpch.h"
+
 #include "EditorAssetManager.h"
+#include "AssetImporter.h"
 
 namespace Hazel {
 
@@ -39,8 +41,12 @@ namespace Hazel {
         else
         {
             const AssetMetadata& metadata = GetMetaData(handle);
-            Ref<Asset> asset = AssetImporter::ImportAsset(metadata);
-            if (!asset) {}
+            Ref<Asset> asset = AssetImporter::ImportAsset(handle, metadata);
+            if (!asset) 
+            {
+                // Import Failed
+                HZ_CORE_ERROR("EditorAssetManager::GetAsset - asset import failed");
+            }
         }
         return asset;
     }

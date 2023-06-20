@@ -21,7 +21,6 @@ namespace Hazel {
 		Buffer(const void* data, uint64_t size)
 			: Data((uint8_t*)data), Size(size)
 		{
-			Allocate(size);
 		}
 
 		Buffer(const Buffer&) = default;

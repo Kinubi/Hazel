@@ -1,26 +1,36 @@
 #include "hzpch.h"
 #include "TextureImporter.h"
 
+#include "Hazel/Project/Project.h"
+
 #include <stb_image.h>
 
 namespace Hazel {
 
 
 
-	Ref<Asset> TextureImporter::ImportTexture2D(AssetHandle handle, const AssetMetadata& metadata)
+	Ref<Texture2D> TextureImporter::ImportTexture2D(AssetHandle handle, const AssetMetadata& metadata)
 	{
+		HZ_PROFILE_FUNCTION();
+		return LoadTexture2D(Project::GetAssetDirectory() / metadata.FilePath);
+	}
+
+	Ref<Texture2D> TextureImporter::LoadTexture2D(const std::filesystem::path& path)
+	{
+		HZ_PROFILE_FUNCTION();
+
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		Buffer data;
 		{
 			HZ_PROFILE_SCOPE("stbi_load - TextureImporter::ImportTexture2D");
-			std::string pathStr = metadata.FilePath.string();
+			std::string pathStr = path.string();
 			data.Data = stbi_load(pathStr.c_str(), &width, &height, &channels, 0);
 		}
 
 		if (data.Data == nullptr)
 		{
-			HZ_CORE_ERROR("Could not load Texture from filepath: {}", metadata.FilePath.string());
+			HZ_CORE_ERROR("Could not load Texture from filepath: {}", path.string());
 			return nullptr;
 		}
 

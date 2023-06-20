@@ -14,7 +14,14 @@ namespace Hazel {
 		virtual bool IsAssetHandleValid(AssetHandle handle) const override;
 		virtual Ref<Asset> GetAsset(AssetHandle handle) const override;
 
+		void ImportAsset(const std::filesystem::path filepath);
+
 		const AssetMetadata& GetMetaData(AssetHandle handle) const;
+
+		const AssetRegistry& GetAssetRegistry() { return m_AssetRegistry; };
+
+		void SerializeAssetRegistry();
+		bool DeserializeAssetRegistry();
 	private:
 		AssetRegistry m_AssetRegistry;
 		AssetMap m_LoadedAssets;

@@ -1,44 +1,43 @@
 #include "hzpch.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
-#include <stb_image.h>
-
 namespace Hazel {
 
 	namespace Utils {
-		static GLenum HazelFormatToDataFormat(ImageFormat format)
+
+		static GLenum HazelImageFormatToGLDataFormat(ImageFormat format)
 		{
 			switch (format)
 			{
-			case ImageFormat::RGB8: return GL_RGB;
+			case ImageFormat::RGB8:  return GL_RGB;
 			case ImageFormat::RGBA8: return GL_RGBA;
-
 			}
 
 			HZ_CORE_ASSERT(false);
 			return 0;
 		}
 
-		static GLenum HazelFormatToGLInternalFormat(ImageFormat format)
+		static GLenum HazelImageFormatToGLInternalFormat(ImageFormat format)
 		{
 			switch (format)
 			{
-			case ImageFormat::RGB8: return GL_RGB8;
+			case ImageFormat::RGB8:  return GL_RGB8;
 			case ImageFormat::RGBA8: return GL_RGBA8;
 			}
 
 			HZ_CORE_ASSERT(false);
 			return 0;
 		}
+
 	}
 
 	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification, Buffer data)
-		: m_Specification(specification), m_Width(specification.Width), m_Height(specification.Height)
+		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
 	{
 		HZ_PROFILE_FUNCTION();
 
-		m_InternalFormat = Utils::HazelFormatToGLInternalFormat(m_Specification.Format);
-		m_DataFormat = Utils::HazelFormatToDataFormat(m_Specification.Format);
+		m_InternalFormat = Utils::HazelImageFormatToGLInternalFormat(m_Specification.Format);
+		m_DataFormat = Utils::HazelImageFormatToGLDataFormat(m_Specification.Format);
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);

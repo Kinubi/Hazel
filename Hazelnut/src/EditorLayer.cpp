@@ -5,6 +5,8 @@
 #include "Hazel/Math/Math.h"
 #include "Hazel/Scripting/ScriptEngine.h"
 #include "Hazel/Renderer/Font.h"
+#include "Hazel/Asset/AssetManager.h"
+#include "Hazel/Asset/SceneImporter.h"
 
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
@@ -280,8 +282,8 @@ namespace Hazel {
 		{
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
-				const wchar_t* path = (const wchar_t*)payload->Data;
-				OpenScene(path);
+				AssetHandle handle = *(AssetHandle*)payload->Data;
+				OpenScene(handle);
 			}
 			ImGui::EndDragDropTarget();
 		}
@@ -629,9 +631,9 @@ namespace Hazel {
 		if (Project::Load(path))
 		{
 			ScriptEngine::Init();
-
-			auto startScenePath = Project::GetAssetFileSystemPath(Project::GetActive()->GetConfig().StartScene);
-			OpenScene(startScenePath);
+			AssetHandle startScene = Project::GetActive()->GetConfig().StartScene;
+			if (startScene)
+				OpenScene(startScene);
 			m_ContentBrowserPanel = CreateScope<ContentBrowserPanel>();
 		}
 	}
@@ -651,32 +653,25 @@ namespace Hazel {
 
 	void EditorLayer::OpenScene()
 	{
-		std::string filepath = FileDialogs::OpenFile("Hazel Scene (*.hazel)\0*.hazel\0");
-		if (!filepath.empty())
-			OpenScene(filepath);
+		//std::string filepath = FileDialogs::OpenFile("Hazel Scene (*.hazel)\0*.hazel\0");
+		//if (!filepath.empty())
+		//	OpenScene(filepath);
 	}
 
-	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	void EditorLayer::OpenScene(AssetHandle handle)
 	{
+		HZ_CORE_ASSERT(handle);
 		if (m_SceneState != SceneState::Edit)
 			OnSceneStop();
 
-		if (path.extension().string() != ".hazel")
-		{
-			HZ_WARN("Could not load {0} - not a scene file", path.filename().string());
-			return;
-		}
-		
-		Ref<Scene> newScene = CreateRef<Scene>();
-		SceneSerializer serializer(newScene);
-		if (serializer.Deserialize(path.string()))
-		{
-			m_EditorScene = newScene;
-			m_SceneHierarchyPanel.SetContext(m_EditorScene);
+		Ref<Scene> scene = AssetManager::GetAsset<Scene>(handle);
+		Ref<Scene> newScene = Scene::Copy(scene);
 
-			m_ActiveScene = m_EditorScene;
-			m_EditorScenePath = path;
-		}
+		m_EditorScene = newScene;
+		m_SceneHierarchyPanel.SetContext(m_EditorScene);
+
+		m_ActiveScene = m_EditorScene;
+		m_EditorScenePath = Project::GetActive()->GetEditorAssetManager()->GetMetaData(handle).FilePath;
 	}
 
 	void EditorLayer::SaveScene()
@@ -689,7 +684,7 @@ namespace Hazel {
 
 	void EditorLayer::SaveSceneAs()
 	{
-		std::string filepath = FileDialogs::SaveFile("Hazel Scene (*.hazel)\0*.hazel\0");
+		const std::filesystem::path& filepath = FileDialogs::SaveFile("Hazel Scene (*.hazel)\0*.hazel\0");
 		if (!filepath.empty())
 		{
 			SerializeScene(m_ActiveScene, filepath);
@@ -699,8 +694,7 @@ namespace Hazel {
 
 	void EditorLayer::SerializeScene(Ref<Scene> scene, const std::filesystem::path& path)
 	{
-		SceneSerializer serializer(scene);
-		serializer.Serialize(path.string());
+		SceneImporter::SaveScene(scene, path);
 	}
 
 	void EditorLayer::OnScenePlay()

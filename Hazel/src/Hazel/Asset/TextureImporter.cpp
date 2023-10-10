@@ -25,7 +25,8 @@ namespace Hazel {
 		{
 			HZ_PROFILE_SCOPE("stbi_load - TextureImporter::ImportTexture2D");
 			std::string pathStr = path.string();
-			data.Data = stbi_load(pathStr.c_str(), &width, &height, &channels, 0);
+			data.Data = stbi_load(pathStr.c_str(), &width, &height, &channels, 4);
+			channels = 4;
 		}
 
 		if (data.Data == nullptr)

@@ -5,18 +5,23 @@
 #include <set>
 #include <map>
 #include <filesystem>
+#include "Hazel/Project/Project.h"
+#include "ThumbnailCache.h"
 
 namespace Hazel {
 
 	class ContentBrowserPanel
 	{
 	public:
-		ContentBrowserPanel();
+		ContentBrowserPanel(Ref<Project> project);
 
 		void OnImGuiRender();
 	private:
 		void RefreshAssetTree();
 	private:
+		Ref<Project> m_Project;
+		Ref<ThumbnailCache> m_ThumbnailCache;
+
 		std::filesystem::path m_BaseDirectory;
 		std::filesystem::path m_CurrentDirectory;
 		

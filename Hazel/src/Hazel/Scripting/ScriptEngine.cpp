@@ -171,7 +171,7 @@ namespace Hazel {
 			return;
 		}
 
-		std::filesystem::path scriptModulePath = Project::GetAssetDirectory() / Project::GetActive()->GetConfig().ScriptModulePath;
+		std::filesystem::path scriptModulePath = Project::GetActiveAssetDirectory() / Project::GetActive()->GetConfig().ScriptModulePath;
 
 		status = LoadAppAssembly(scriptModulePath);
 		if (!status)

@@ -138,12 +138,14 @@
     <ClInclude Include="src\EditorLayer.h" />
     <ClInclude Include="src\Panels\ContentBrowserPanel.h" />
     <ClInclude Include="src\Panels\SceneHierarchyPanel.h" />
+    <ClInclude Include="src\Panels\ThumbnailCache.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorLayer.cpp" />
     <ClCompile Include="src\HazelnutApp.cpp" />
     <ClCompile Include="src\Panels\ContentBrowserPanel.cpp" />
     <ClCompile Include="src\Panels\SceneHierarchyPanel.cpp" />
+    <ClCompile Include="src\Panels\ThumbnailCache.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hazel\Hazel.vcxproj">

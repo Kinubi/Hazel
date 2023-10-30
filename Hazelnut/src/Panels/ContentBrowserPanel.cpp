@@ -116,6 +116,88 @@ namespace Hazel {
 		}
 		else
 		{
+			uint32_t count = 0;
+			for (auto& directoryEntry : std::filesystem::directory_iterator(m_CurrentDirectory))
+			{
+				count++;
+			}
+			ImGuiListClipper clipper(count);
+			bool first = true;
+			
+			while (clipper.Step())
+			{
+				auto it = std::filesystem::directory_iterator(m_CurrentDirectory);
+				if (!first)
+				{
+					for (int i = 0; i < clipper.DisplayStart; i++)
+					{
+						for (int c = 0; c < columnCount && it != std::filesystem::directory_iterator(); c++)
+						{
+							it++;
+						}
+					}
+				}
+				for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
+				{
+					int c;
+					for (c = 0; c < columnCount && it != std::filesystem::directory_iterator(); c++, it++)
+					{
+
+						const auto directoryEntry = *it;
+						const auto& path = directoryEntry.path();
+						std::string filenameString = path.filename().string();
+
+						ImGui::PushID(filenameString.c_str());
+						auto relativePath = std::filesystem::relative(path, Project::GetActiveAssetDirectory());
+						Ref<Texture2D> thumbnail = m_DirectoryIcon;
+						if (!directoryEntry.is_directory())
+						{
+							thumbnail = m_ThumbnailCache->GetOrCreateThumbnail(relativePath);
+							if (!thumbnail)
+								thumbnail = m_FileIcon;
+						}
+
+
+						ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+						ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+
+						if (ImGui::BeginPopupContextItem())
+						{
+							if (ImGui::MenuItem("Import"))
+							{
+								Project::GetActive()->GetEditorAssetManager()->ImportAsset(relativePath);
+								RefreshAssetTree();
+							}
+							ImGui::EndPopup();
+						}
+
+						ImGui::PopStyleColor();
+						if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+						{
+							if (directoryEntry.is_directory())
+								m_CurrentDirectory /= path.filename();
+						}
+						ImGui::TextWrapped(filenameString.c_str());
+
+						ImGui::NextColumn();
+
+						ImGui::PopID();
+					}
+
+					if (first && c != columnCount)
+					{
+						for (int i = 0; i < columnCount - c; i++)
+						{
+							ImGui::NextColumn();
+						}
+					}
+				}
+				first = false;
+			}
+
+		}
+
+#if 0
 			for (auto& directoryEntry : std::filesystem::directory_iterator(m_CurrentDirectory))
 			{
 				const auto& path = directoryEntry.path();
@@ -157,7 +239,7 @@ namespace Hazel {
 
 				ImGui::PopID();
 			}
-		}
+#endif
 
 
 		ImGui::Columns(1);
@@ -167,6 +249,8 @@ namespace Hazel {
 
 		// TODO: status bar
 		ImGui::End();
+
+		m_ThumbnailCache->OnUpdate();
 	}
 
 	void ContentBrowserPanel::RefreshAssetTree()

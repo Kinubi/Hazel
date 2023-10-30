@@ -3,11 +3,13 @@
 #include "Hazel/Project/Project.h"
 #include "Hazel/Renderer/Texture.h"
 
+#include <queue>
+
 namespace Hazel {
 
 	struct ThumbnailImage
 	{
-		uint32_t Timestamp;
+		uint64_t Timestamp;
 		Ref<Texture2D> Image;
 	};
 
@@ -17,10 +19,20 @@ namespace Hazel {
 		ThumbnailCache(Ref<Project> project);
 
 		Ref<Texture2D> GetOrCreateThumbnail(const std::filesystem::path& assetPath);
+		void OnUpdate();
 	private:
 		Ref<Project> m_Project;
 
 		std::map<std::filesystem::path, ThumbnailImage> m_CachedImages;
+
+		struct ThumbnailInfo
+		{
+			std::filesystem::path AbsolutePath;
+			std::filesystem::path AssetPath;
+			uint64_t Timestamp;
+		};
+
+		std::queue<ThumbnailInfo> m_Queue;
 
 		std::filesystem::path m_ThumbnailCachePath;
 	};

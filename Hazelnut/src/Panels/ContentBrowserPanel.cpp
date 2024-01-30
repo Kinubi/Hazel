@@ -161,7 +161,14 @@ namespace Hazel {
 
 						ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
 						float thumbnailHeight = thumbnailSize * ((float)thumbnail->GetHeight() / (float)thumbnail->GetWidth());
+						float diff = thumbnailSize - thumbnailHeight;
+
+						ImGui::SetCursorPosY(ImGui::GetCursorPosY() + diff);
+
 						ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize, thumbnailHeight }, { 0, 1 }, { 1, 0 });
+						ImGui::PushID(thumbnail->GetRendererID());
+						ImGui::InvisibleButton("##thumbnailDrag", {thumbnailSize, thumbnailSize});
+						ImGui::PopID();
 						if (ImGui::IsItemHovered())
 						{
 							ImGui::BeginTooltip();

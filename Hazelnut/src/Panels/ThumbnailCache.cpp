@@ -56,6 +56,7 @@ namespace Hazel {
 			}
 
 			Ref<Texture2D> texture = TextureImporter::LoadTexture2D(thumbnailInfo.AbsolutePath);
+			texture->ChangeSize(16, 16);
 			if (!texture)
 			{
 				m_Queue.pop();

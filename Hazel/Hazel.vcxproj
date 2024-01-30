@@ -211,6 +211,7 @@
     <ClInclude Include="src\Hazel\Scripting\ScriptGlue.h" />
     <ClInclude Include="src\Hazel\UI\UI.h" />
     <ClInclude Include="src\Hazel\Utils\PlatformUtils.h" />
+    <ClInclude Include="src\Hazel\Utils\StringUtils.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
@@ -683,6 +684,7 @@
     <ClCompile Include="src\Hazel\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\Hazel\Scripting\ScriptEngine.cpp" />
     <ClCompile Include="src\Hazel\Scripting\ScriptGlue.cpp" />
+    <ClCompile Include="src\Hazel\Utils\StringUtils.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />

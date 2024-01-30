@@ -1564,6 +1564,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Hazel\Asset\SceneImporter.h" />
+    <ClInclude Include="src\Hazel\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Hazel\Asset\Asset.cpp">
@@ -1732,5 +1733,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Hazel\Asset\SceneImporter.cpp" />
+    <ClCompile Include="src\Hazel\Utils\StringUtils.cpp" />
   </ItemGroup>
 </Project>

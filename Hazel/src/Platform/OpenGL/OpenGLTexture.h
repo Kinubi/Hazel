@@ -18,6 +18,10 @@ namespace Hazel {
 		virtual uint32_t GetWidth() const override { return m_Width;  }
 		virtual uint32_t GetHeight() const override { return m_Height; }
 		virtual uint32_t GetRendererID() const override { return m_RendererID; }
+
+		virtual uint64_t GetEstimatedSize() const override { return m_Width * m_Height * 4; }
+
+		virtual void ChangeSize(uint32_t newWidth, uint32_t newHeight) override;
 		
 		virtual void SetData(Buffer data) override;
 

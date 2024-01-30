@@ -3,6 +3,7 @@
 
 #include "Hazel/Asset/TextureImporter.h"
 #include "Hazel/Project/Project.h"
+#include "Hazel/Utils/StringUtils.h"
 
 #include <imgui/imgui.h>
 
@@ -159,7 +160,17 @@ namespace Hazel {
 
 
 						ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-						ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+						float thumbnailHeight = thumbnailSize * ((float)thumbnail->GetHeight() / (float)thumbnail->GetWidth());
+						ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize, thumbnailHeight }, { 0, 1 }, { 1, 0 });
+						if (ImGui::IsItemHovered())
+						{
+							ImGui::BeginTooltip();
+							std::string sizeString = Utils::BytesToString(thumbnail->GetEstimatedSize());
+							ImGui::Text("Mem: %s", sizeString.c_str());
+							ImGui::EndTooltip();
+							
+						}
+
 
 						if (ImGui::BeginPopupContextItem())
 						{

@@ -48,6 +48,7 @@ namespace Hazel {
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
+
 		if (data)
 			SetData(data);
 	}
@@ -57,6 +58,37 @@ namespace Hazel {
 		HZ_PROFILE_FUNCTION();
 
 		glDeleteTextures(1, &m_RendererID);
+	}
+
+	void OpenGLTexture2D::ChangeSize(uint32_t newWidth, uint32_t newHeight)
+	{
+		// Create new texture
+
+		uint32_t newTextureID;
+		glCreateTextures(GL_TEXTURE_2D, 1, &newTextureID);
+		glTextureStorage2D(newTextureID, 1, m_InternalFormat, newWidth, newHeight);
+
+		glTextureParameteri(newTextureID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTextureParameteri(newTextureID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTextureParameteri(newTextureID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(newTextureID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+
+		GLuint fboIds[2] = { 0 };
+		glGenFramebuffers(2, fboIds);
+
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, fboIds[0]);
+		glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_RendererID, 0);
+
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fboIds[1]);
+		glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, newTextureID, 0);
+
+		glBlitFramebuffer(0, 0, m_Width, m_Height, 0, 0, newWidth, newHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+		glDeleteTextures(1, &m_RendererID);
+		glDeleteFramebuffers(2, fboIds);
+		m_RendererID = newTextureID;
 	}
 
 	void OpenGLTexture2D::SetData(Buffer data)
